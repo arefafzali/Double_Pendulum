@@ -1,4 +1,10 @@
-function dx = DPD (t,x,m1,m2,L1,L2,g)
+function dx = DPD (t,x)
+
+L1 = 1;
+L2 = 1;
+m1 = 1;
+m2 = 1;
+g = 9.81;
 
 dx = x;
 
