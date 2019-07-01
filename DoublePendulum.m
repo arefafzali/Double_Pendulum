@@ -4,10 +4,10 @@ clear;
 %%
 % syms theta1(t) theta2(t) L1 L2 M1 M2 g
 
-l1 = 1;
-l2 = 1;
-m1 = 1;
-m2 = 1;
+l1 = input('Enter l1:');
+l2 = input('Enter l2:');
+m1 = input('Enter m1:');
+m2 = input('Enter m2:');
 g = 9.81;
 
 tspan=50;
