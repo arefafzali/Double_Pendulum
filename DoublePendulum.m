@@ -13,7 +13,6 @@ m2 = input('Enter m2:');
 theta1_degree = input('Enter theta 1:');
 theta2_degree = input('Enter theta 2:');
 
-
 theta1= theta1_degree * pi/180;
 theta1_prime=0;
 theta2= theta2_degree * pi/180;
