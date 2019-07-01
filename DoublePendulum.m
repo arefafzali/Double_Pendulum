@@ -2,63 +2,65 @@
 clc;
 clear;
 %%
-% syms theta1(t) theta2(t) L1 L2 M1 M2 g
 
-l1 = 1;
-l2 = 1;
-m1 = 1;
-m2 = 1;
+tspan=10;
 g = 9.81;
 
-tspan=50;
-theta1=1.6;
+l1 = input('Enter l1:');
+l2 = input('Enter l2:');
+m1 = input('Enter m1:');
+m2 = input('Enter m2:');
+theta1_degree = input('Enter theta 1:');
+theta2_degree = input('Enter theta 2:');
+
+
+theta1= theta1_degree * pi/180;
 theta1_prime=0;
-theta2=2.2;
+theta2= theta2_degree * pi/180;
 theta2_prime=0;
 
-y0=[theta1 theta2 theta1_prime theta2_prime];
-[t,y]=ode45(@DPD, [0 ,tspan],[1.57 1.57 0 0]);
+[t,y]=ode45(@(t,y)DPD(t,y,m1,m2,l1,l2,g), [0 ,tspan], [theta1 theta2 theta1_prime theta2_prime]);
 
 %%
+
 x1=l1*sin(y(:,1));
 y1=-l1*cos(y(:,1));
-x2=l1*sin(y(:,1))+l2*sin(y(:,3));
-y2=-l1*cos(y(:,1))-l2*cos(y(:,3));
+x2=l1*sin(y(:,1))+l2*sin(y(:,2));
+y2=-l1*cos(y(:,1))-l2*cos(y(:,2));
 
 figure(1)
-plot(x1,y1,'linewidth',2)
+plot(x1,y1,'linewidth',2);
 hold on
-plot(x2,y2,'r','linewidth',2)
+plot(x2,y2,'r','linewidth',2);
 h=gca; 
-get(h,'fontSize') 
-set(h,'fontSize',14)
+get(h,'fontSize') ;
+set(h,'fontSize',14);
 xlabel('X','fontSize',14);
 ylabel('Y','fontSize',14);
-title('Chaotic Double Pendulum','fontsize',14)
+title('Double Pendulum','fontsize',14);
 fh = figure(1);
 set(fh, 'color', 'white'); 
 
-figure(2)
-plot(y(:,1),'linewidth',2)
+figure(2);
+plot(y(:,1),'linewidth',2);
 hold on
-plot(y(:,3),'r','linewidth',2)
+plot(y(:,2),'r','linewidth',2);
 h=gca; 
-get(h,'fontSize') 
-set(h,'fontSize',14)
-legend('\theta_1','\theta_2')
+get(h,'fontSize');
+set(h,'fontSize',14);
+legend('\theta_1','\theta_2');
 xlabel('time','fontSize',14);
 ylabel('theta','fontSize',14);
-title('\theta_1(t=0)=2.5 and \theta_2(t=0)=1.0','fontsize',14)
 fh = figure(2);
 set(fh, 'color', 'white'); 
 
 figure(3)
 Ncount=0;
-fram=0;
+frame=0;
    
 for i=1:length(y)
-    Ncount=Ncount+1;
-    fram=fram+1;
+    Ncount = Ncount+1;
+    frame = frame+2;
     plot(0, 0,'.','markersize',20);
     hold on
     plot(x1(i),y1(i),'.','markersize',20);
@@ -77,4 +79,3 @@ for i=1:length(y)
     set(fh, 'color', 'white'); 
     F=getframe;
 end
-
